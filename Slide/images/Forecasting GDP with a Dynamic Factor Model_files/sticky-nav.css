@@ -1,0 +1,17 @@
+.affix { position: fixed; }
+
+.sticky_header_container { width: 962px; overflow: visible; z-index: 99997; }
+.sticky_header_container.affix { border-bottom: 1px solid #d1d1d1; }
+.sticky_header_container.affix-top + .content_frame {	margin-top: 0px !important; border-top: 1px solid #d1d1d1; }
+
+/* Removes top border for scrolling purposes */
+.content_frame { border-top:none; }
+
+/* Solves issues with Share(AddThis) with sticky nav */
+.atm-i { position: fixed\9 !important; } /* ONLY IE */
+#at20mc {	position: fixed !important;	}
+
+/* Back to Top box */
+.go-top { padding: 22px 22px 22px 22px; font-size: 12px; font-weight: bold; font-style: normal; color: #fff; text-transform: uppercase; text-decoration: none; background: #000000 url(/images/nextgen/global/ico-top-arrow.png) no-repeat center 16px; background-color: rgba(0, 0, 0, .3); position: fixed; bottom: 2em; right: 2em; display: none; cursor: pointer;-moz-border-radius: 4px;border-radius: 4px;
+	}
+.go-top:hover { background-color: rgba(0, 0, 0, .6); color: #fff; text-decoration: none;}

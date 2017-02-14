@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<!-- saved from url=(0102)http://www.mathworks.com/company/newsletters/articles/forecasting-gdp-with-a-dynamic-factor-model.html -->
+<html class="wf-automate-n7-active wf-futurapt-i4-active wf-futurapt-i5-active wf-futurapt-i7-active wf-futurapt-n4-active wf-futurapt-n5-active wf-futurapt-n7-active wf-minionprosubhead-n4-active wf-museoslab-n7-active wf-active"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" async="async" src="./Forecasting GDP with a Dynamic Factor Model_files/id"></script><script type="text/javascript" async="" src="./Forecasting GDP with a Dynamic Factor Model_files/elqCfg.min.js"></script><script src="./Forecasting GDP with a Dynamic Factor Model_files/aquant.js" async="" type="text/javascript"></script><script type="text/javascript" async="async" src="./Forecasting GDP with a Dynamic Factor Model_files/id"></script>
+
+<title>Forecasting GDP with a Dynamic Factor Model</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- BEGIN Adobe DTM -->
+<script src="./Forecasting GDP with a Dynamic Factor Model_files/satelliteLib-e8d23c2e444abadc572df06537e2def59c01db09.js"></script><script src="./Forecasting GDP with a Dynamic Factor Model_files/mbox.js"></script><script src="./Forecasting GDP with a Dynamic Factor Model_files/satellite-56972e2c64746d54aa00cb73.js"></script>
+<!-- END Adobe DTM --> <link href="./Forecasting GDP with a Dynamic Factor Model_files/reset.css" rel="stylesheet" type="text/css">
+<link href="./Forecasting GDP with a Dynamic Factor Model_files/960.css" rel="stylesheet" type="text/css">
+<link href="./Forecasting GDP with a Dynamic Factor Model_files/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="./Forecasting GDP with a Dynamic Factor Model_files/site5.css" rel="stylesheet" type="text/css">
+<!--[if IE 6]>
+<link href="/includes_content/nextgen/css/site5_ie6.css?20131015" rel="stylesheet" type="text/css">
+<![endif]-->
+<!--[if IE 7]>
+<link href="/includes_content/nextgen/css/site5_ie7.css?20131015" rel="stylesheet" type="text/css">
+<![endif]-->
+<!--[if IE 8]>
+<link href="/includes_content/nextgen/css/site5_ie8.css?20131015" rel="stylesheet" type="text/css">
+<![endif]-->
+<!--[if IE 9]>
+<link href="/includes_content/nextgen/css/site5_ie9.css?20131015" rel="stylesheet" type="text/css">
+<![endif]-->
+<link href="./Forecasting GDP with a Dynamic Factor Model_files/print.css" rel="stylesheet" type="text/css" media="print">
+<link rel="stylesheet" type="text/css" href="./Forecasting GDP with a Dynamic Factor Model_files/shadowbox.css">
+<link href="./Forecasting GDP with a Dynamic Factor Model_files/sticky-nav.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./Forecasting GDP with a Dynamic Factor Model_files/jquery-latest.js"></script>
+<script type="text/javascript" src="./Forecasting GDP with a Dynamic Factor Model_files/jquery.hover-intent.js"></script>
+<script type="text/javascript" src="./Forecasting GDP with a Dynamic Factor Model_files/localnav.js"></script>
+<script type="text/javascript" src="./Forecasting GDP with a Dynamic Factor Model_files/global.js"></script>
+<script type="text/javascript" src="./Forecasting GDP with a Dynamic Factor Model_files/global_search.js"></script>
+<script src="./Forecasting GDP with a Dynamic Factor Model_files/bootstrap.min.js"></script>
+<script src="./Forecasting GDP with a Dynamic Factor Model_files/bootstrap-affix.min.js"></script>
+<script src="./Forecasting GDP with a Dynamic Factor Model_files/sticky-nav.js"></script>
+<script type="text/javascript" src="./Forecasting GDP with a Dynamic Factor Model_files/shadowbox.js"></script>
+<script type="text/javascript">
+Shadowbox.init();
+</script>
+<script type="text/javascript" language="JavaScript1.3">var domain = "com";</script>
+<script type="text/javascript" src="./Forecasting GDP with a Dynamic Factor Model_files/xvy5baa.js"></script>
+<style type="text/css">.tk-museo-slab{font-family:"museo-slab",serif;}.tk-futura-pt{font-family:"futura-pt","Arial","Helvetica",sans-serif;}.tk-automate{font-family:"automate",sans-serif;}.tk-minion-pro-subhead{font-family:"minion-pro-subhead",serif;}</style><link rel="stylesheet" href="./Forecasting GDP with a Dynamic Factor Model_files/xvy5baa-l.css" media="all"><script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+<meta name="description" content="A MATLAB based model lets economists quickly update GDP forecasts and deliver the results almost in real time">
+<link rel="stylesheet" href="./Forecasting GDP with a Dynamic Factor Model_files/print(1).css" type="text/css" media="print">
+<script type="text/javascript" src="./Forecasting GDP with a Dynamic Factor Model_files/jquery.cookie.js"></script>
+<script type="text/javascript">
+(function() {
+// Check if cookies are enabled
+function cookiesEnabled() {
+return $.cookie('check', 'valid', { expires: 1 }) && $.cookie('check') == 'valid';
+}
+// Set the language of the domain and redirect to the domain
+function setDomainLanguage(language) {
+if($.cookie("lang") != null) {
+$.removeCookie("lang");
+}
+$.cookie("lang", 'lang=' + language, {path: '/', expires: 365, domain: 'ch.mathworks.com'});
+}
+// do not display the domain selector if querystring is not present
+// or if query string has nocookie value
+// or if cookies are disabled
+var displayDomainSelector = true;
+function detectDomain() {
+var queries = {};
+$.each(document.location.search.substr(1).split('&'), function(c,q){
+if(q != undefined && q != "") {
+var i = q.split('=');
+if(i[1] != undefined) {
+queries[i[0].toString()] = i[1].toString();
+}
+}
+});
+var requested_domain = (queries['requestedDomain'] != undefined) ? queries['requestedDomain'] : "";
+var nocookie = (queries['nocookie'] != undefined) ? queries['nocookie'] : "";
+var client = (queries['client'] != undefined) ? queries['client'] : "";
+if(requested_domain == "" || nocookie == "true" || !cookiesEnabled() || client == "addons" || window.overrideDomainSelector) {
+displayDomainSelector = false;
+}
+}
+detectDomain();
+function extractDomain(url) {
+var domain;
+//find & remove protocol (http, ftp, etc.) and get domain
+if (url.indexOf("://") > -1) {
+domain = url.split('/')[2];
+} else {
+domain = url.split('/')[0];
+}
+//find & remove port number
+domain = domain.split(':')[0];
+return domain;
+}
+function getDomainContent(returnContent) {
+// Get the location information from the marketing site
+$.ajax({
+url : "/includes_content/domainSelect/location.html",
+type : "get",
+async: false,
+success : function(data) {
+$("#location_content").html(data);
+var button_link = $("#button_link").text();
+var current_location = $("#current_location").text();
+var location_key = $("#location_key").text();
+//Set the location in the text and button
+$(".text_location").text(current_location);
+$(".domain_selector a").text("Select " + current_location);
+// if the current location is different from the browser location, update the button functionality
+var browser_domain = extractDomain(window.location.href);
+if(button_link.indexOf(browser_domain) == -1) {
+// Get the current page link from the links within the selector
+new_button_link = $("." + location_key).attr("href");
+$(".domain_selector a").attr("href",new_button_link);
+}
+}
+});
+if(returnContent) {
+return $('#country-unselected').html();
+}
+}
+$(document).ready(function () {
+//setLocation();
+// determine if links need to be rewritten
+if ( $( "#country-unselected li a" ).length ) {
+$("#country-unselected li a").each(function() {
+var link_url = $(this).attr("href").replace(/%26requestedDomain(%3D[^%26|&]*)?|requestedDomain(%3D[^%26|&]*)?(%26)?/, "");
+$(this).attr("href", link_url);
+});
+}
+if ( $( "li.headernav_login > a" ).length ) {
+var login_url = $("li.headernav_login > a").attr("href").replace(/%26requestedDomain(%3D[^%26|&]*)?|requestedDomain(%3D[^%26|&]*)?(%26)?/, "");
+$("li.headernav_login > a").attr("href", login_url);
+}
+if ( $( "li.mwa-nav_logout > a" ).length ) {
+var login_url = $("li.mwa-nav_logout > a").attr("href").replace(/%26requestedDomain(%3D[^%26|&]*)?|requestedDomain(%3D[^%26|&]*)?(%26)?/, "");
+$("li.mwa-nav_logout > a").attr("href", login_url);
+}
+if ( $( ".mwa-nav li a" ).length ) {
+$(".mwa-nav li a").each(function() {
+var link_url = $(this).attr("href").replace(/%26requestedDomain(%3D[^%26|&]*)?|requestedDomain(%3D[^%26|&]*)?(%26)?/, "");
+$(this).attr("href", link_url);
+});
+}
+// set the country dropdown link to open the new domain selector
+$("#globalcountry_link").click(function(){
+var content = getDomainContent(true);
+Shadowbox.open({
+content: content,
+player: "html",
+height: 660,
+width: 800
+});
+});
+// set the selector button to close the modal
+$('body').on('click','#domain_select_button',function(){
+Shadowbox.close();
+});
+// set the click function for Switzerland/French link
+$('body').on('click','#swiss_french',function(){
+setDomainLanguage('fr');
+});
+// set the click function for the Switzerland/German link
+$('body').on('click','#swiss_german',function(){
+setDomainLanguage('de');
+});
+});
+// onload functionality for the selector
+window.onload = function() {
+$(document).ready(function () {
+if(displayDomainSelector) {
+var content = getDomainContent(true);
+Shadowbox.open({
+content: content,
+player: "html",
+height: 660,
+width: 800
+});
+}
+});
+}
+})(jQuery);
+</script>
+<script src="./Forecasting GDP with a Dynamic Factor Model_files/s-code-contents-73da148cb454c4f6e395aa8df704854c99540662.js"></script></head> 
+<body id="nextgen_b" class="adjusted_template">
+	<div class="container_192">
+	  <div class="grid_192">
+	    <div class="page_container">
+
+        <div class="grid_192">
+            	<div class="header_container">
+<div class="headernav">
+<ul>
+<li class="headernav_country"><a href="http://www.mathworks.com/company/newsletters/articles/forecasting-gdp-with-a-dynamic-factor-model.html#" id="globalcountry_link">United States</a></li>
+<li class="headernav_contact"><a href="http://www.mathworks.com/company/aboutus/contact_us/?s_tid=gn_cntus">Contact Us</a></li>
+<li class="headernav_store"><a href="http://www.mathworks.com/store/?s_tid=gn_store">How To Buy</a></li>
+<li class="headernav_search"><form name="search" id="site_search" class="site_search" action="http://www.mathworks.com/search/site_search.html" method="get">
+<input type="text" name="q" id="query" class="textfield clear_global_search_text_onfocus" value="Search MathWorks" autocomplete="off">
+<input type="submit" id="searchbutton" value="Search" class="submit_go clear_global_search_text_onsubmit">
+</form></li>
+</ul>
+</div>
+<div class="mwa-nav">
+<ul>
+<li class="mwa-nav_account"><a id="mwa-create_account" href="https://www.mathworks.com/mwaccount/register?uri=http://www.mathworks.com/company/newsletters/articles/forecasting-gdp-with-a-dynamic-factor-model.html">Create Account</a></li>
+<li class="mwa-nav_logout"><a id="mwa-log_in" href="https://www.mathworks.com/login?uri=http://www.mathworks.com/company/newsletters/articles/forecasting-gdp-with-a-dynamic-factor-model.html">Log In</a></li>
+</ul>
+</div>
+<div class="logo_container">
+<a href="http://www.mathworks.com/index.html?s_tid=gn_logo"><img src="./Forecasting GDP with a Dynamic Factor Model_files/bg_header_mwlogo_notag.jpg" alt="MathWorks" class="mw_logo"></a>
+<p class="tagline">Accelerating the pace of engineering and science</p>
+</div>
+</div>
+        </div>
+        
+        <div class="grid_192"> <div class="topnav_container">
+<div class="topnav_frame">
+<div class="topnav">
+<ul>
+<li class="topnav_products "><a href="http://www.mathworks.com/products/?s_tid=gn_ps">Products</a></li>
+<li class="topnav_solutions "><a href="http://www.mathworks.com/solutions/?s_tid=gn_sol">Solutions</a></li>
+<li class="topnav_academia "><a href="http://www.mathworks.com/academia/?s_tid=gn_acad">Academia</a></li>
+<li class="topnav_support "><a href="http://www.mathworks.com/support/?s_tid=gn_supp">Support</a></li>
+<li class="topnav_community "><a href="http://www.mathworks.com/matlabcentral/?s_tid=gn_mlc">Community</a></li>
+<li class="topnav_events "><a href="http://www.mathworks.com/company/events/?s_tid=gn_ev">Events</a></li>
+<li class="topnav_company active"><a href="http://www.mathworks.com/company/?s_tid=gn_co">Company</a></li>
+</ul>
+</div>
+</div>
+</div> </div>
+	      <div class="sticky_header_container affix"> 
+	          <div class="grid_192">        
+        <div class="section_image level_3" style="background-color:#8bbcc9; background-image:url(/images/nextgen/section_heads/bg-newsletters.png);
+        ">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tbody><tr>
+          <td>         <p class="h1">Technical Articles and Newsletters</p> 
+     
+                </td>
+                <td class="ctabox_container">
+                <ul class="ctabox">
+                              
+
+
+        <li><a href="http://www.mathworks.com/company/aboutus/contact_us/contact_sales.html" class="sales" target="">Contact sales</a></li>
+                </ul>	
+ </td>
+        </tr>
+          </tbody></table>
+    </div>
+</div>
+	                <div class="grid_192">
+	                    <div class="horizontal_nav_container">
+	                        <div class="subnav" id="subnav">
+<ul>
+<li class="">
+<a href="http://www.mathworks.com/company/newsletters/index.html">Overview</a>
+</li><li class="">
+<a href="http://www.mathworks.com/company/newsletters/search.html">Search Technical Articles</a>
+</li><li class="">
+<a href="http://www.mathworks.com/company/newsletters/articles/forecasting-gdp-with-a-dynamic-factor-model.html" data-toggle="dropdown" data-target="#">Newsletters<span class="caret"></span></a>
+<ul class="dropdown-menu">
+<li class=""><a href="http://www.mathworks.com/digest/current/">MATLAB Digest</a></li><li class=""><a href="http://www.mathworks.com/edu_digest/current/">MATLAB Digest | Academic Edition</a></li><li class=""><a href="http://www.mathworks.com/news_notes/current/">MathWorks News&amp;Notes</a></li>
+</ul>
+</li><li class="">
+<a href="http://www.mathworks.com/company/newsletters/clevescorner/">Cleve's Corner Collection</a>
+</li><li class="">
+<a href="http://www.mathworks.com/company/newsletters/signup.html">Sign Up</a>
+</li>
+</ul>
+</div>
+	                    </div>
+	                </div>
+	      </div>
+	      <div class="content_frame" style="margin-top: 84px;">
+	        <div class="grid_192">
+	        
+	          <div class="content_container" id="content_container">
+	          		      <div id="tech_articles_indiv_article"> 
+    
+ 
+
+        
+        
+<div class="grid_128 push_6">
+      <div class="grid_128">
+		<h1>Forecasting GDP with a Dynamic Factor Model</h1>
+        <div class="grid_86">
+          <div id="byline">
+            <p>By Ángel Cuevas, Spanish Ministry of Industry, Tourism and Trade and Enrique M. Quilis, Spanish Ministry of Economy and Finance</p>          </div>
+        </div>
+        <div class="grid_42">
+			                  <div id="datasheet">
+
+
+
+
+
+
+
+
+ 
+                <a href="http://www.mathworks.com/tagteam/72400_92011v00_forecasting-gdp-with-a-dynamic-factor-model.pdf" class="datasheet float_right " target="_blank">View PDF </a>
+   
+                  </div>
+			        </div>
+      </div>
+      <div class="grid_128">
+		<p>Measuring GDP accurately on a regular basis helps policy makers, economists, and business leaders determine appropriate policies, research direction, and financial strategies. While headline GDP figures are typically reported each quarter, it is helpful for government and business organizations to refer to updated numbers in the weeks between.</p><p>At the Ministry of Economy and Finance we have developed a dynamic factor model to estimate and forecast the rate of growth of the Spanish economy in the very short term. This model uses a coincident indicator, or <em>estimated common factor</em>, to forecast GDP by means of a transfer function. The model estimates a common factor underlying 31 economic indicators spanning domestic production, the labor market, and domestic trade flows. It enables us to forecast GDP several times a week, providing a virtually real-time complement to the four quarterly GDP official reports issued each year.</p><p>MATLAB<sup>®</sup> was a natural choice for this work because much of the processing requires matrix operations. <a href="http://www.mathworks.com/discovery/kalman-filter.html">Kalman filters</a> simplified the process of estimating the common factor from the economic indicators in a dynamic way.</p><h2>Selecting the Economic Indicators</h2><p>With 31 indicators, our model avoids the disadvantages inherent in both larger and smaller models. Models with more than 80 indicators are difficult to interpret, require more work to maintain, and suffer from group effects that can distort the estimation of the common factor. On the other hand, models with fewer than 12 indicators can lack sufficient coverage, omit useful information from excluded indicators, and be more susceptible to the abnormal behavior of a single indicator.</p><p>The indicators we use cover a wide range of domestic economic activity, including industrial production, air traffic, cement usage, tourism, energy consumption, transport by railway, housing starts, and employee compensation. We supplement these domestic indicators with external ones, such as imports and exports of goods and services, as well as social security contributors (employment) and other labor-market indicators.</p><p>In addition, our model includes qualitative indicators reflecting the level of confidence Spaniards have in their business and household finances. Such indicators are less common in dynamic factor models because they are difficult to integrate with hard data. These so-called soft indicators, however, provide a useful alternative perspective on the economy, and they are promptly available, making them valuable for short-term forecasting.</p><h2>Preprocessing Data with TRAMO-SEATS</h2><p>To ensure that our results are not distorted by the presence of seasonal and calendar effects, we remove these effects using seasonal adjustment and time series techniques. At the Bank of Spain, two programs have been developed for the statistical analysis and seasonal adjustment of time series data: TRAMO (Time series Regression with ARIMA errors, Missing values and Outliers) and SEATS (Signal Extraction in ARIMA Time Series).</p><p>We invoke the TRAMO-SEATS software from MATLAB to perform seasonal adjustments on the time series indicator data and to verify its integrity. One of our ministry colleagues developed a MATLAB interface to the TRAMO-SEATS software that enables us to execute TRAMO and SEATS applications for time series data directly from MATLAB. After making the seasonal adjustments, we use MATLAB to perform logarithmic and stationary-inducing transformation on the data.</p><h2>Developing the Dynamic Common Factor Model</h2><p>The common factor model must consider both static and dynamic interactions among the observed indicators. We use MATLAB to estimate the common factor with principal components. We then use a Kalman filter to introduce dynamics into the model. A complete representation of the dynamic factor model implemented in MATLAB has the form</p><div><a href="http://www.mathworks.com/cmsimages/66646_wl_meh24382_fig1_wl.jpg" shape="rect"><img alt="meh24382_fig1_w.jpg" class="" height="319" src="./Forecasting GDP with a Dynamic Factor Model_files/66646_wm_meh24382_fig1_w.jpg" width="350"></a></div><p>where <em>Z<sub>t</sub></em> are observations, <em>f<sub>t</sub></em> is the common factor, <em>U<sub>t</sub></em> are idiosyncratic factors, <em>L</em> is a factor loading matrix, Φ<sub><em>f</em></sub>(<em>B</em>) is an AR(4) operator, Φ<sub><em>U</em></sub>(<em>B</em>) is a VAR(1) operator with diagonal AR(1) matrix, <em>Q<sub>e</sub></em> is a diagonal matrix, and B is the lag (or backshift) operator <em>BZ<sub>t</sub></em> = <em>Z<sub>t-1</sub></em>.</p><p>Among the biggest operational challenges that we faced in developing the model was analyzing data from different time periods. We had a complete set of observed data for several indicators over the entire time period (a longitudinal panel), as well as observed data for all indicators over a shorter time period (a cross-section panel). What we lacked was a complete set of observed data for all indicators over the entire time period (Figure 1).</p><div class="image_container"><a href="http://www.mathworks.com/cmsimages/66647_wl_meh24382_fig2_wl.jpg" shape="rect"><img alt="Figure 1. An unbalanced panel, with missing data for some indicators." class="" height="193" src="./Forecasting GDP with a Dynamic Factor Model_files/66647_wm_meh24382_fig2_w.jpg" width="350"></a></div><div class="caption_container"><p>Figure 1. An unbalanced panel, with missing data for some indicators.</p></div><p>To handle this unbalanced panel, we implemented an iterative process in MATLAB that begins with the estimation of a static factor model by principal components using the longitudinal panel data. Indicators that were excluded from the longitudinal panel are individually regressed using ordinary least squares. We then calculate a new factor from the statically balanced panel and apply a Kalman filter to estimate the missing values. This process, which is repeated until convergence is achieved, is based on an approach outlined by Chang-Jin Kim and Charles R. Nelson [1].</p><h2>Generating the GDP Forecast</h2><p>After estimating the common factor using the dynamic factor model, we use a transfer function model to forecast GDP. This model defines a simple and quantitatively consistent relationship between the common factor and the GDP or other macroeconomic aggregates. We use a time series analysis package to derive the parameters of the transfer function and then implement it using MATLAB. We check the specification of the transfer function with the results of a bivariate vector autoregressive and moving average (VARMA) model. Finally, we use the MATLAB <tt>filter</tt> function to forecast the current quarter GDP based on the common factor and the transfer function. Figure 2 shows the relation of the estimated factor and the GDP quarter-on-quarter rate of growth.</p><div class="image_container"><a href="http://www.mathworks.com/cmsimages/66648_wl_meh24382_fig3_wl.jpg" shape="rect"><img alt="Figure 2. Temporal aggregation of the common factor (red) and GDP (blue) from 1990 to 2010." class="" height="218" src="./Forecasting GDP with a Dynamic Factor Model_files/66648_wm_meh24382_fig3_w.jpg" width="350"></a></div><div class="caption_container"><p>Figure 2. Temporal aggregation of the common factor (red) and GDP (blue) from 1990 to 2010.</p></div>We update the GDP forecasts whenever we have new data for one of our indicators, which can be several times a week. MATLAB completes all the calculations in minutes, enabling us to deliver results almost in real time. We produce our reports by exporting our data from the MATLAB workspace into a Microsoft<sup>®</sup> Excel<sup>®</sup> spreadsheet using Spreadsheet Link<span class="tm">™</span> EX. Since the common factor is closely linked to GDP growth and can be computed in a more timely fashion, it provides economists and business leaders with a reasonably accurate estimate of Spain’s GDP well before the official GDP numbers are released (Figure 3). <div class="image_container"><a href="http://www.mathworks.com/cmsimages/66649_wl_meh24382_fig4_wl.jpg" shape="rect"><img alt="Figure 3. Real-time forecasts and final GDP data." class="" height="457" src="./Forecasting GDP with a Dynamic Factor Model_files/66649_wm_meh24382_fig4_w.jpg" width="350"></a></div><div class="caption_container"><p>Figure 3. Real-time forecasts (plus ±σ interval) and final GDP data.</p></div><h2>Cyclical Analysis</h2><p>In addition to GDP forecasting, we use the dynamic factor model in other economic studies, including the simulation of macro scenarios and cyclical analysis. For example, we have used the model and cyclical bandpass filters to identify turning points in the business cycle for the past 20 years. Using Signal Processing Toolbox<span class="tm">™</span>, we applied a Butterworth filter to extract the signal from the data and pinpoint cyclical turning points (Figure 4). We use a bandpass Butterworth filter because it provides a cleaner picture of economic fluctuations than the Hodrick-Prescott filter, which acts like an implicit high-pass filter that leaks high-frequency noise. The absence of irregular components makes it considerably easier for the algorithms to identify business cycle turning points.</p><div class="image_container"><a href="http://www.mathworks.com/cmsimages/66650_wl_meh24382_fig5_wl.jpg" shape="rect"><img alt="Figure 4. Business cycle turning points in the Spanish economy, 1990-2010, identified using a MATLAB based dynamic factor model. " class="" height="267" src="./Forecasting GDP with a Dynamic Factor Model_files/66650_wm_meh24382_fig5_w.jpg" width="350"></a></div><div class="caption_container"><p>Figure 4. Business cycle turning points in the Spanish economy, 1990-2010, identified using a MATLAB based dynamic factor model. Turning points play a qualitative role, defining business cycle phases: expansions (from trough to peak) and recessions (from peak to trough).</p></div>We continue to refine the estimation procedures in the model with MATLAB, and we update the list of indicators as needed to improve the accuracy of our forecasts.      </div>      
+      <div class="grid_128">
+            <div class="footnote float_right">
+            <p>Published 2012 - 92011v00</p>
+            </div>
+      </div>           
+      <div class="grid_128">
+		<div class="separator margined_40"> </div>
+      </div>
+      <div class="grid_128">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+  
+  
+  
+      <div class="callout_container   solid margined_20  ">
+        <div class="callout_content  bg_center_center" id="reference_container">         	<div class="grid_136">
+									<h3>References</h3>
+					<p>[1] Chang-Jin Kim and Charles R. Nelson, <a href="http://mitpress.mit.edu/catalog/item/default.asp?tid=3926&amp;ttype=2" target="_blank">State-Space Models with Regime Switching</a>, MIT Press 1999.</p> <br><br>
+				           </div>
+		<div class="grid_122">			<div class="grid_59">				
+																										           	<h3>Products Used</h3>
+			<ul>
+																											<li><a href="http://www.mathworks.com/products/matlab">MATLAB</a></li>
+																																										<li><a href="http://www.mathworks.com/products/signal">Signal Processing Toolbox</a></li>
+													<li><a href="http://www.mathworks.com/products/excellink">Spreadsheet Link</a></li>
+																		</ul>
+			                	         	</div>
+           <div class="grid_59 push_4">
+			        					<h3>Learn More</h3>
+								<ul>
+    				                    																			    						     							    																									<li><a href="http://www.springerlink.com/content/27j04k57q78vm808/fulltext.pdf?MUD=MP" target="_blank">A Factor Analysis for the Spanish Economy</a></li>
+						    				                    																			    						     							    																									<li><a href="http://www.bde.es/webbde/en/secciones/servicio/software/interfaces.html" target="_blank">Download: MATLAB interface for TRAMO-SEATS</a></li>
+						    								</ul>
+        	         	</div>
+		</div>
+ </div>
+      </div>
+
+  
+      </div>
+
+    	  <div class="grid_128">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+  
+  
+  
+      <div class="callout_container   solid margined_20  ">
+        <div class="callout_content  bg_center_center" id="reference_container">           <div class="grid_122">
+			    					<div class="grid_59">
+              <h3>View Articles for Related Capabilities</h3>
+				                 			  <ul>
+                <li><a href="http://www.mathworks.com/company/newsletters/search.html?q=capability%3A%22Data+Analysis%22">Data Analysis</a></li>
+              </ul>
+                 			  <ul>
+                <li><a href="http://www.mathworks.com/company/newsletters/search.html?q=capability%3A%22Mathematical+Modeling%22">Mathematical Modeling</a></li>
+              </ul>
+                            </div>
+						            <div class="grid_59 push_4">
+              <h3>View Articles for Related Industries</h3>
+ 				                 			  <ul>
+                <li><a href="http://www.mathworks.com/company/newsletters/search.html?q=industry%3A%22Financial+Services%22">Financial Services</a></li>
+              </ul>
+			              </div>
+			          </div>
+ </div>
+      </div>
+
+  
+      </div>
+	  
+    </div>
+	<div class="current_url" style="display:none;">
+		This page was printed from: <strong>http://www.mathworks.com/company/newsletters/articles/forecasting-gdp-with-a-dynamic-factor-model.html</strong>
+	</div>
+
+</div>
+<div class="grid_50 push_4">
+  <h3>Start a new search</h3>
+  <div class="search_container">
+              <form method="get" action="http://www.mathworks.com/company/newsletters/search.html" id="technical_articles_search" name="search">
+				   <input type="hidden" value="technical_articles_us" name="c[]">
+                <input type="hidden" value="technical_articles_en" name="c[]">
+                
+                <input type="text" class="textfield clear_text_onfocus" name="q" id="technical_articles_query" value="Search Technical Articles" autocomplete="off">
+                <input id="submitsearch" class="search_submit clear_text_onsubmit" type="submit" value="Search" name="submitsearch">
+              </form>
+  </div>
+</div>
+
+  
+
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+         
+ 
+ 
+
+
+<div id="location_content" style="display:none;"></div>
+
+<style>
+h2.domain_selector { border-bottom:none; }
+</style>
+
+<div id="country-unselected" style="display:none;" translate="no"> 
+  <div class="content_container" id="content_container">
+    <div class="container_192">
+      <div class="grid_150 push_3">
+        <object type="image/svg+xml" width="167px" class="mw_logo" alt="MathWorks" data="./Forecasting GDP with a Dynamic Factor Model_files/pic-header-mathworks-logo2.svg">
+          <img alt="MathWorks" width="167px" src="./Forecasting GDP with a Dynamic Factor Model_files/pic-header-mathworks-logo.png">
+        </object>
+      </div>
+      <div class="clear"></div>
+      <div class="separator"></div>
+      <div class="grid_150 push_3 margined_20">
+        <h1>Select Your Country</h1>
+        <p>Choose your country to get translated content where available and see local events and offers. Based on your location, we recommend that you select: <strong class="text_location"></strong>.</p>
+        <div class="domain_selector">
+
+
+
+
+
+
+
+
+
+        <div class="button rounded margined_20  secondary  " id="domain_select_button">
+                <a href="http://www.mathworks.com/company/newsletters/articles/forecasting-gdp-with-a-dynamic-factor-model.html#"></a>
+        </div>
+        </div>
+      </div>
+      <div class="clear"></div>
+      <div class="grid_150 push_3">
+        <p>You can also select a location from the following list:</p>
+        <div class="grid_32">
+          <h2 class="domain_selector">Americas</h2>
+          <div class="separator"></div>
+          <ul class="unbulleted_list">
+            <li><a href="http://www.mathworks.com/company/newsletters/articles/forecasting-gdp-with-a-dynamic-factor-model.html?action=changeCountry&amp;s_tid=gn_loc_drop" class="canada_select">Canada</a> (English)</li>
+            <li><a href="http://www.mathworks.com/company/newsletters/articles/forecasting-gdp-with-a-dynamic-factor-model.html?action=changeCountry&amp;s_tid=gn_loc_drop" class="united_states_select">United States</a> (English)</li>
+          </ul>
+        </div>
+        <div class="grid_76 push_5">
+          <h2 class="domain_selector">Europe</h2>
+          <div class="separator"></div>
+          <div class="grid_32">
+            <ul class="unbulleted_list">
+              <li><a href="http://nl.mathworks.com/company/newsletters/articles/forecasting-gdp-with-a-dynamic-factor-model.html?action=changeCountry&amp;s_tid=gn_loc_drop" class="belgium_select">Belgium</a> (English)</li>
+              <li><a href="http://se.mathworks.com/company/newsletters/articles/forecasting-gdp-with-a-dynamic-factor-model.html?action=changeCountry&amp;s_tid=gn_loc_drop" class="denmark_select">Denmark</a> (English)</li>
+              <li><a href="http://de.mathworks.com/company/newsletters/articles/forecasting-gdp-with-a-dynamic-factor-model.html?action=changeCountry&amp;s_tid=gn_loc_drop" class="deutschland_select">Deutschland</a> (Deutsch)</li>
+              <li><a href="http://es.mathworks.com/company/newsletters/articles/forecasting-gdp-with-a-dynamic-factor-model.html?action=changeCountry&amp;s_tid=gn_loc_drop" class="espana_select">España</a> (Español)</li>
+              <li><a href="http://se.mathworks.com/company/newsletters/articles/forecasting-gdp-with-a-dynamic-factor-model.html?action=changeCountry&amp;s_tid=gn_loc_drop" class="finland_select">Finland</a> (English)</li>
+              <li><a href="http://fr.mathworks.com/company/newsletters/articles/forecasting-gdp-with-a-dynamic-factor-model.html?action=changeCountry&amp;s_tid=gn_loc_drop" class="france_select">France</a> (Français)</li>
+              <li><a href="http://uk.mathworks.com/company/newsletters/articles/forecasting-gdp-with-a-dynamic-factor-model.html?action=changeCountry&amp;s_tid=gn_loc_drop" class="ireland_select">Ireland</a> (English)</li>
+              <li><a href="http://it.mathworks.com/company/newsletters/articles/forecasting-gdp-with-a-dynamic-factor-model.html?action=changeCountry&amp;s_tid=gn_loc_drop" class="italia_select">Italia</a> (Italiano)</li>
+              <li><a href="http://nl.mathworks.com/company/newsletters/articles/forecasting-gdp-with-a-dynamic-factor-model.html?action=changeCountry&amp;s_tid=gn_loc_drop" class="luxembourg_select">Luxembourg</a> (English)</li>
+            </ul>
+          </div>
+          <div class="grid_32 push_5">
+            <ul class="unbulleted_list">
+              <li><a href="http://nl.mathworks.com/company/newsletters/articles/forecasting-gdp-with-a-dynamic-factor-model.html?action=changeCountry&amp;s_tid=gn_loc_drop" class="netherlands_select">Netherlands</a> (English)</li>
+              <li><a href="http://se.mathworks.com/company/newsletters/articles/forecasting-gdp-with-a-dynamic-factor-model.html?action=changeCountry&amp;s_tid=gn_loc_drop" class="norway_select">Norway</a> (English)</li>
+              <li><a href="http://de.mathworks.com/company/newsletters/articles/forecasting-gdp-with-a-dynamic-factor-model.html?action=changeCountry&amp;s_tid=gn_loc_drop" class="osterreich_select">Österreich</a> (Deutsch)</li>
+              <li><a href="http://www.mathworks.com/company/newsletters/articles/forecasting-gdp-with-a-dynamic-factor-model.html?action=changeCountry&amp;s_tid=gn_loc_drop" class="portugal_select">Portugal</a> (English)</li>
+              <li><a href="http://se.mathworks.com/company/newsletters/articles/forecasting-gdp-with-a-dynamic-factor-model.html?action=changeCountry&amp;s_tid=gn_loc_drop" class="sweden_select">Sweden</a> (English)</li>
+              <li>Switzerland
+                <ul class="unbulleted_list" style="margin-left:20px;">
+                  <li><a href="http://ch.mathworks.com/company/newsletters/articles/forecasting-gdp-with-a-dynamic-factor-model.html?action=changeCountry&amp;s_tid=gn_loc_drop" id="swiss_german" class="switzerland_select">Deutsch</a></li>
+                  <li><a href="http://ch.mathworks.com/company/newsletters/articles/forecasting-gdp-with-a-dynamic-factor-model.html?action=changeCountry&amp;s_tid=gn_loc_drop" id="swiss_french">Français</a></li>
+                </ul>
+              </li>
+              <li><a href="http://uk.mathworks.com/company/newsletters/articles/forecasting-gdp-with-a-dynamic-factor-model.html?action=changeCountry&amp;s_tid=gn_loc_drop" class="united_kingdom_select">United Kingdom</a> (English)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="grid_32 push_5">
+          <h2 class="domain_selector">Asia Pacific</h2>
+          <div class="separator"></div>
+          <ul class="unbulleted_list">
+            <li><a href="http://au.mathworks.com/company/newsletters/articles/forecasting-gdp-with-a-dynamic-factor-model.html?action=changeCountry&amp;s_tid=gn_loc_drop" class="australia_select">Australia</a> (English)</li>
+            <li><a href="http://in.mathworks.com/company/newsletters/articles/forecasting-gdp-with-a-dynamic-factor-model.html?action=changeCountry&amp;s_tid=gn_loc_drop" class="india_select">India</a> (English)</li>
+            <li><a href="http://au.mathworks.com/company/newsletters/articles/forecasting-gdp-with-a-dynamic-factor-model.html?action=changeCountry&amp;s_tid=gn_loc_drop" class="new_zealand_select">New Zealand</a> (English)</li>
+            <li><a href="http://cn.mathworks.com/company/newsletters/articles/forecasting-gdp-with-a-dynamic-factor-model.html?action=changeCountry&amp;s_tid=gn_loc_drop" class="china_select">中国</a> (简体中文)</li>
+            <li><a href="http://jp.mathworks.com/company/newsletters/articles/forecasting-gdp-with-a-dynamic-factor-model.html?action=changeCountry&amp;s_tid=gn_loc_drop" class="japan_select">日本</a> (日本語)</li>
+            <li><a href="http://kr.mathworks.com/company/newsletters/articles/forecasting-gdp-with-a-dynamic-factor-model.html?action=changeCountry&amp;s_tid=gn_loc_drop" class="korea_select">한국</a> (한국어)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="clear"></div>
+      <div class="grid_150 push_3">
+        <p class="txt_center"><strong><a href="http://www.mathworks.com/company/worldwide/">See all countries</a></strong></p>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+	            
+	                
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+		
+	  
+	  <div class="grid_192">
+<div class="fat_footer">
+<div id="homepage_fat_footer" class="grid_176 push_8">
+<div class="grid_26">
+<ul class="unbulleted_list">
+<li class="header"><a href="http://www.mathworks.com/company/">About MathWorks</a></li>
+<li><a href="http://www.mathworks.com/company/jobs/opportunities/">Careers – <em>500+ Openings</em></a></li>
+<li><a href="http://www.mathworks.com/company/aboutus/soc_mission/">Social Mission</a></li>
+<li><a href="http://www.mathworks.com/company/aboutus/contact_us/">Contact Us</a></li>
+<li><a href="http://www.mathworks.com/videos/">Videos</a></li>
+<li>&nbsp;</li>
+<li><a href="http://www.mathworks.com/discovery/">Discover…</a></li>
+</ul>
+</div>
+<div class="grid_26 push_4">
+<ul class="unbulleted_list">
+<li class="header"><a href="http://www.mathworks.com/support/">Support</a></li>
+<li><a href="http://www.mathworks.com/help/">Documentation</a></li>
+<li><a href="http://www.mathworks.com/programs/bounce_hub_generic.html?url=/licensecenter/">License Center</a></li>
+<li><a href="http://www.mathworks.com/downloads/web_downloads/">Downloads</a></li>
+<li><a href="http://www.mathworks.com/support/contact_us/index.html">Contact Support</a></li>
+</ul>
+</div>
+<div class="grid_26 push_4">
+<ul class="unbulleted_list">
+<li class="header"><a href="http://www.mathworks.com/company/events/">Events</a></li>
+<li><a href="http://www.mathworks.com/company/events/webinars/upcoming.html">Webinars</a></li>
+<li><a href="http://www.mathworks.com/company/events/seminars/">Seminars</a></li>
+<li><a href="http://www.mathworks.com/company/events/conferences/">Conferences</a></li>
+<li><a href="http://www.mathworks.com/company/events/tradeshows/">Tradeshows</a></li>
+</ul>
+</div>
+<div class="grid_26 push_4">
+<ul class="unbulleted_list">
+<li class="header"><a href="http://www.mathworks.com/services/training/index.html">Training</a></li>
+<li><a href="http://www.mathworks.com/services/training/courses/">Classroom</a></li>
+<li><a href="http://www.mathworks.com/services/training/online.html">Online</a></li>
+<li><a href="http://www.mathworks.com/services/training/request_training.html">Training at Your Facility</a></li>
+<li><a href="http://www.mathworks.com/training-schedule/">Schedule</a></li>
+</ul>
+</div>
+<div class="grid_26 push_4">
+<ul class="unbulleted_list">
+<li class="header"><a href="http://www.mathworks.com/matlabcentral/">User Community</a></li>
+<li><a href="http://www.mathworks.com/matlabcentral/fileexchange/">File Exchange</a></li>
+<li><a href="http://www.mathworks.com/matlabcentral/answers/index/">MATLAB Answers</a></li>
+<li><a href="http://www.mathworks.com/matlabcentral/newsreader/">Newsgroup</a></li>
+<li><a href="http://blogs.mathworks.com/">Blogs</a></li>
+</ul>
+</div>
+<div class="grid_26 push_4">
+<ul class="unbulleted_list">
+<li class="header"><a href="http://www.mathworks.com/company/newsroom/press-releases/">News</a></li>
+<li><a href="http://www.mathworks.com/company/newsroom/">Newsroom</a></li>
+<li><a href="http://www.mathworks.com/company/newsletters/">Newsletters</a></li>
+<li><a href="http://www.mathworks.com/company/user_stories/">User Stories</a></li>
+<li><a href="http://www.mathworks.com/company/newsletters/search.html">Technical Articles</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+	  <div class="grid_192"> <div class="footer_container">
+<div class="footer">
+<div class="social_media_icon_container">
+<div class="social_media_icons">
+<ul class="footernav">
+<li class="footernav_rss"><a href="http://www.mathworks.com/company/rss/index.html"></a></li>
+<li class="footernav_linkedin"><a href="http://www.linkedin.com/company/the-mathworks_2" target="_blank"></a></li>
+<li class="footernav_google"><a href="https://plus.google.com/117177960465154322866?prsrc=3" target="_blank"></a></li>
+<li class="footernav_facebook"><a href="http://www.facebook.com/MATLAB" target="_blank"></a></li>
+<li class="footernav_twitter"><a href="http://www.twitter.com/MATLAB" target="_blank"></a></li>
+</ul>
+</div>
+<p><em>Join the conversation</em></p>
+</div>
+<ul class="footernav">
+<li class="footernav_piracy"><a href="http://www.mathworks.com/company/aboutus/policies_statements/piracy.html?s_tid=gf_pir">Preventing Piracy</a></li>
+<li class="footernav_privacy"><a href="http://www.mathworks.com/company/aboutus/policies_statements/?s_tid=gf_priv">Privacy Policy</a></li>
+<li class="footernav_trademarks"><a href="http://www.mathworks.com/company/aboutus/policies_statements/trademarks.html?s_tid=gf_trd">Trademarks</a></li>
+<li class="footernav_patents"><a href="http://www.mathworks.com/company/aboutus/policies_statements/patents.html?s_tid=gf_pat">Patents</a></li>
+</ul>
+<div class="copyright" translate="no">© 1994-2016 The MathWorks, Inc.</div>
+</div>
+</div>
+<!-- BEGIN Adobe DTM -->
+<script type="text/javascript">
+try {
+_satellite.pageBottom();
+} catch (e) {
+//something went wrong
+}
+</script><script>
+ var qcord;var qcrev; var qclabels;
+ var ezt = ezt ||[];
+
+ (function(){
+   var elem = document.createElement('script');
+   elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://pixel") + ".quantserve.com/aquant.js?a=p-zfNtLVVEHXE-1";
+   elem.async = true;
+   elem.type = "text/javascript";
+   var scpt = document.getElementsByTagName('script')[0];
+   scpt.parentNode.insertBefore(elem,scpt);
+ }());
+
+
+ ezt.push({qacct: 'p-zfNtLVVEHXE-1',
+           orderid: qcord,
+           revenue: qcrev,
+           labels: qclabels
+           });
+</script>
+<noscript>
+  &lt;img src="//pixel.quantserve.com/pixel/p-zfNtLVVEHXE-1.gif?labels=_fp.event.Default" style="display: none;" border="0" height="1" width="1" alt="Quantcast"/&gt;
+</noscript><script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 1023777138;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Forecasting GDP with a Dynamic Factor Model_files/conversion.js">
+</script><iframe name="google_conversion_frame" title="Google conversion frame" width="300" height="13" src="./Forecasting GDP with a Dynamic Factor Model_files/saved_resource.html" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no"></iframe>
+<noscript>
+&lt;div style="display:inline;"&gt;
+&lt;img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1023777138/?value=0&amp;amp;guid=ON&amp;amp;script=0"/&gt;
+&lt;/div&gt;
+</noscript>
+<!-- END Adobe DTM --> </div>
+	</div>
+
+
+<div class="go-top"></div><div id="sb-container"><div id="sb-overlay"></div><div id="sb-wrapper"><div id="sb-title"><div id="sb-nav"><a id="sb-nav-close" title="Close" onclick="Shadowbox.close()"></a><a id="sb-nav-next" title="Next" onclick="Shadowbox.next()"></a><a id="sb-nav-play" title="Play" onclick="Shadowbox.play()"></a><a id="sb-nav-pause" title="Pause" onclick="Shadowbox.pause()"></a><a id="sb-nav-previous" title="Previous" onclick="Shadowbox.previous()"></a><div id="sb-counter"></div></div><div id="sb-title-inner"></div></div><div id="sb-wrapper-inner"><div id="sb-body"><div id="sb-body-inner"></div><div id="sb-loading"><div id="sb-loading-inner"><span>loading</span></div></div></div></div><div id="sb-info"><div id="sb-info-inner"></div></div></div></div></body></html>
